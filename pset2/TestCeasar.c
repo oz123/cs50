@@ -12,28 +12,35 @@
  
 
 char* StrToUpper(char* str) {
-        int i = 0;
-        while ( str[i] != '\0'){
-            str[i] = toupper(str[i]);
-            i++;
-            }
-        return str;
+  int i = 0;
+  while ( str[i] != '\0'){
+    str[i] = toupper(str[i]);
+    i++;
     }
-    
-void TestStrToUpper(CuTest *tc) {
-        // char *input = "hello world";
-        // This is implicit const char *input!
-        // This is why it will cause segmentation fault
-        // We can't change a const variable
-        char input[] = "hello world";
-        char* actual = StrToUpper(input);
-        char* expected = "HELLO WORLD";
-        CuAssertStrEquals(tc, expected, actual);
-    }
+  return str;
+}
+
+char rotate(int key, char thechar){
+  
+  
+
+  return 'C';
 
 
-    CuSuite* StrUtilGetSuite() {
-        CuSuite* suite = CuSuiteNew();
-        SUITE_ADD_TEST(suite, TestStrToUpper);
-        return suite;
-    }
+}
+
+
+void TestCipher(CuTest *tc) {
+  // char *input = "hello world";
+  // This is implicit const char *input!
+  // This is why it will cause segmentation fault
+  // We can't change a const variable
+  CuAssertTrue(tc, rotate(13, 'C') == 'P');
+}
+
+
+CuSuite * StrUtilGetSuite() {
+  CuSuite* suite = CuSuiteNew();
+  SUITE_ADD_TEST(suite, TestCipher);
+  return suite;
+}
