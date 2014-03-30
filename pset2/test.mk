@@ -7,7 +7,7 @@ ifdef DEBUG
   CFLAGS+=-g
 endif 
 
-LIBS=-lcs50 -lm 
+LIBS=-lcs50 -lm
 
 # use this when compiling with -static
 
@@ -16,12 +16,12 @@ LIBS=-lcs50 -lm
 	# $< is the first item in the dependencies list
 
 
-	all: build run
+all: build run
 
-
-	build: caesar.o
-		$(CC) CuTest.c TestCeasar.c $^ $(CFLAGS) $(LIBS) \
+build:
+	$(CC) AllTests.c CuTest.c TestCeasar.c $^ $(CFLAGS) $(LIBS) \
 		-o test_runner
+
 run:
 	./test_runner
 
