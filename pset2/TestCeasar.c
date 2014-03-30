@@ -17,7 +17,7 @@ char rotate(int key, char in){
   int idx;
   if (islower(in)){
     idx= (int)in - 97;
-    printf("ascii_lower[idx]: %c", ascii_lower[idx]);
+    //printf("ascii_lower[idx]: %c", ascii_lower[idx]);
     return ascii_lower[(idx+key)%26];
   }
   if (isupper(in)){
@@ -30,6 +30,19 @@ char rotate(int key, char in){
     return in;
 }
 
+/*
+ * Encrypt a give in string using key, 
+ * return the encrypted string 
+ * */
+char* encrypt_string(char* str, int key) {
+    char *cipher = malloc(strlen(str)-1);
+    int i = 0;
+    for (; i < strlen(str); i++){
+        cipher[i] = rotate(key, str[i]);
+       }
+    cipher[i] = '\0';
+    return cipher;
+}
 
 void TestCipher(CuTest *tc) {
   CuAssertTrue(tc, rotate(13*3, 'c') == 'p');
@@ -39,9 +52,17 @@ void TestCipher(CuTest *tc) {
   CuAssertTrue(tc, rotate(13, ' ') == ' ');
 }
 
+void TestCipherString(CuTest *tc) {
+  char *text = "Hello World";
+  char* cipher = encrypt_string(text, 13);
+  CuAssertStrEquals(tc, "Hello World", text);
+  CuAssertStrEquals(tc, "Uryyb Jbeyq", cipher);
+}
+
 
 CuSuite * StrUtilGetSuite() {
   CuSuite* suite = CuSuiteNew();
   SUITE_ADD_TEST(suite, TestCipher);
+  SUITE_ADD_TEST(suite, TestCipherString);
   return suite;
 }
