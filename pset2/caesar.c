@@ -13,12 +13,28 @@
  * 
  * The program should preseve the case of letters. 
  *
+ * The formula for encrypting a char is:
+ *
+ *
+ * ci = (pi + k) % 26
+ *
  * */
 #include <stdio.h>
 #include <stdlib.h>
 #include <cs50.h>
 #include <limits.h>
 #include <errno.h>
+
+const char ascii_lower = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const char ascii_upper = "abcdefghijklmnopqrstuvwxyz";
+
+/* 
+ * a -> 97
+   z -> 122
+
+   A -> 65
+   Z -> 90
+  */
 
 int get_key(char * argk){
   int base = 10;

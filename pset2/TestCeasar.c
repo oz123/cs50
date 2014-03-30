@@ -10,32 +10,33 @@
 
 #define DATA_SIZE 512
  
+const char *ascii_upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const char *ascii_lower = "abcdefghijklmnopqrstuvwxyz";
 
-char* StrToUpper(char* str) {
-  int i = 0;
-  while ( str[i] != '\0'){
-    str[i] = toupper(str[i]);
-    i++;
-    }
-  return str;
-}
-
-char rotate(int key, char thechar){
-  
-  
-
-  return 'C';
-
-
+char rotate(int key, char in){
+  int idx;
+  if (islower(in)){
+    idx= (int)in - 97;
+    printf("ascii_lower[idx]: %c", ascii_lower[idx]);
+    return ascii_lower[(idx+key)%26];
+  }
+  if (isupper(in)){
+    idx= (int)in - 65;
+    //printf("ascii_upper[idx]: %c\n", ascii_upper[idx]);
+    //printf("ascii_upper[idx+key]: %c\n", ascii_upper[idx+key]);
+    return ascii_upper[(idx+key)%26];
+  }
+  else
+    return in;
 }
 
 
 void TestCipher(CuTest *tc) {
-  // char *input = "hello world";
-  // This is implicit const char *input!
-  // This is why it will cause segmentation fault
-  // We can't change a const variable
+  CuAssertTrue(tc, rotate(13*3, 'c') == 'p');
+  CuAssertTrue(tc, rotate(13*3, 'C') == 'P');
+  CuAssertTrue(tc, rotate(13*3, ' ') == ' ');
   CuAssertTrue(tc, rotate(13, 'C') == 'P');
+  CuAssertTrue(tc, rotate(13, ' ') == ' ');
 }
 
 
